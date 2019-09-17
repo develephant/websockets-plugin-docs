@@ -1,0 +1,129 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "WebSocket Client Plugin for Corona Games and Apps\n\n\n\nThe \nWebSockets\n plugin provides a WebSocket client for your \nCorona\n projects with a simple to use API. Supports both secure and standard connections*.\n\n\n*Supports the WebSocket protocol (RFC6455)\n\n\nGet the Plugin\n\n\nIf you don't already have it, get the \nWebSockets\n plugin from the \nCorona Marketplace\n.\n\n\nEnable the Plugin\n\n\nEnable the plugin by adding the following entries to the \nplugins\n table of your projects \nbuild.settings\n file:\n\n\nsettings =\n{\n    plugins =\n    {\n      [\"plugin.websockets\"] = {\n          publisherId = \"com.develephant\"\n      },\n      [\"plugin.openssl\"] = {\n        publisherId = \"com.coronalabs\",\n      },\n      [\"plugin.bit\"] = {\n        publisherId = \"com.coronalabs\",\n      }\n    },\n}\n\n\n\n\n\nRequire the Plugin\n\n\nIn your code file make sure to \nrequire\n the plugin.\n\n\nlocal\n \nWebSockets\n \n=\n \nrequire\n(\n\"plugin.websockets\"\n)\n\n\n\n\n\n\n You're ready to start using WebSockets! Move on to the \nAPI\n section to learn more.",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#get-the-plugin",
+            "text": "If you don't already have it, get the  WebSockets  plugin from the  Corona Marketplace .",
+            "title": "Get the Plugin"
+        },
+        {
+            "location": "/#enable-the-plugin",
+            "text": "Enable the plugin by adding the following entries to the  plugins  table of your projects  build.settings  file:  settings =\n{\n    plugins =\n    {\n      [\"plugin.websockets\"] = {\n          publisherId = \"com.develephant\"\n      },\n      [\"plugin.openssl\"] = {\n        publisherId = \"com.coronalabs\",\n      },\n      [\"plugin.bit\"] = {\n        publisherId = \"com.coronalabs\",\n      }\n    },\n}",
+            "title": "Enable the Plugin"
+        },
+        {
+            "location": "/#require-the-plugin",
+            "text": "In your code file make sure to  require  the plugin.  local   WebSockets   =   require ( \"plugin.websockets\" )    You're ready to start using WebSockets! Move on to the  API  section to learn more.",
+            "title": "Require the Plugin"
+        },
+        {
+            "location": "/api/",
+            "text": "Before using the \nWebSockets\n plugin you must \nrequire\n it in your code file:\n\n\nlocal\n \nWebSockets\n \n=\n \nrequire\n(\n\"plugin.websockets\"\n)\n\n\n\n\n\n\nAPI\n\n\nnew\n\n\nCreates a new WebSocket object.\n\n\nWebSockets\n.\nnew\n()\n\n\n\n\n\n\nArguments\n\n\nThis method takes no arguments.\n\n\nReturns\n\n\nA new WebSocket object\n\n\nExample\n\n\nlocal\n \nws\n \n=\n \nWebSockets\n.\nnew\n()\n\n\n\n\n\n\n Alternatively, you can create a WebSocket object during the require.\n\n\nlocal\n \nws\n \n=\n \nrequire\n(\n\"plugin.websockets\"\n).\nnew\n()\n\n\n\n\n\n\n\n\naddEventListener\n\n\nAdd the WebSocket event handler.\n\n\nws\n:\naddEventListener\n(\nevent\n,\n \nlistener\n)\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\nevent\n\n\nThe event to start listening for. Must be \nWSEVENT\n.\n\n\nConstant\n\n\nY\n\n\n\n\n\n\nlistener\n\n\nThe function that will be called on a WebSocket event.\n\n\nFunction\n\n\nY\n\n\n\n\n\n\n\n\nExample\n\n\n...\n\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONOPEN\n \nthen\n\n    \nprint\n(\n'connected'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONMESSAGE\n \nthen\n\n    \nprint\n(\n'message'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONCLOSE\n \nthen\n\n    \nprint\n(\n'disconnected'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONERROR\n \nthen\n\n    \nprint\n(\n'error'\n)\n\n  \nend\n\n\nend\n\n\n\nws\n:\naddEventListener\n(\nws\n.\nWSEVENT\n,\n \nWsListener\n)\n\n\n\n...\n\n\n\n\n\n\n See \nEvent Constants\n for more details about each event type.\n\n\n\n\nremoveEventListener\n\n\nRemove the WebSocket event handler.\n\n\nws\n:\nremoveEventListener\n(\nevent\n,\n \nevent_handler\n)\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\nevent\n\n\nThe event to stop listening for. Must be \nWSEVENT\n.\n\n\nConstant\n\n\nY\n\n\n\n\n\n\nlistener\n\n\nThe function that is being called on a WebSocket event.\n\n\nFunction\n\n\nY\n\n\n\n\n\n\n\n\nExample\n\n\nAssuming the event listener in the \naddEventListener\n example.\n\n\nws\n:\nremoveEventListener\n(\nws\n.\nWSEVENT\n,\n \nWsListener\n)\n\n\n\n\n\n\n\n\nconnect\n\n\nConnect the WebSocket object to a WebSocket endpoint.\n\n\nws\n:\nconnect\n(\nuri\n[,\n \nport\n])\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\nuri\n\n\nThe WebSocket endpoint to connect to. Supports \nws://\n and \nwss://\n protocols.\n\n\nString\n\n\nY\n\n\n\n\n\n\nport\n\n\nThe port for the WebSocket endpoint. Defaults to \n80\n for \nws://\n and \n443\n for \nwss://\n protocols.\n\n\nNumber\n\n\nN\n\n\n\n\n\n\n\n\nExample\n\n\nws\n:\nconnect\n(\n'ws://demos.kaazing.com/echo'\n)\n\n\n\n\n\n\n Make sure your WebSocket event handler is set up before calling this method. See \naddEventListener\n.\n\n\n\n\ndisconnect\n\n\nDisconnect the WebSocket object from the endpoint.\n\n\nws\n:\ndisconnect\n()\n\n\n\n\n\n\nArguments\n\n\nThis method takes no arguments.\n\n\n\n\nsend\n\n\nSend a message over the WebSocket connection.\n\n\nws\n:\nsend\n(\ndata\n)\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\nType\n\n\nRequired\n\n\n\n\n\n\n\n\n\n\ndata\n\n\nThe message data to send over the connection.\n\n\nString\n\n\nY\n\n\n\n\n\n\n\n\nExample\n\n\nws\n:\nsend\n(\n\"Hello WebSocket server\"\n)\n\n\n\n\n\n\n\n\nEvent Constants\n\n\nThe following event constants are used in the WebSocket event listener. Some events will include addtional data that can be accessed from the \nevent\n object. See also: \naddEventListener\n.\n\n\nONOPEN\n\n\nThe WebSocket connection is open and ready.\n\n\nws\n.\nONOPEN\n\n\n\n\n\n\nEvent Keys\n\n\nThis event contains no event keys.\n\n\nExample\n\n\n...\n\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONOPEN\n \nthen\n\n    \nprint\n(\n'connected'\n)\n\n  \nend\n\n\nend\n\n\n\n...\n\n\n\n\n\n\n\n\nONMESSAGE\n\n\nA WebSocket message has been received.\n\n\nws\n.\nONMESSAGE\n\n\n\n\n\n\nEvent Keys\n\n\n\n\ndata\n\n\n\n\nExample\n\n\n...\n\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONMESSAGE\n \nthen\n\n    \nprint\n(\nevent\n.\ndata\n)\n \n--> message data\n\n  \nend\n\n\nend\n\n\n\n...\n\n\n\n\n\n\n\n\nONCLOSE\n\n\nThe WebSocket connection has closed and is no longer available.\n\n\nws\n.\nONCLOSE\n\n\n\n\n\n\nEvent Keys\n\n\n\n\ncode\n\n\nreason\n\n\n\n\nExample\n\n\n...\n\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONCLOSE\n \nthen\n\n    \nprint\n(\nevent\n.\ncode\n,\n \nevent\n.\nreason\n)\n \n--> closure code and reason\n\n  \nend\n\n\nend\n\n\n\n...\n\n\n\n\n\n\n\n\nONERROR\n\n\nA WebSocket error has occurred. This will generally close the connection.\n\n\nws\n.\nONERROR\n\n\n\n\n\n\nEvent Keys\n\n\n\n\ncode\n\n\nreason\n\n\n\n\nExample\n\n\n...\n\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONERROR\n \nthen\n\n    \nprint\n(\nevent\n.\ncode\n,\n \nevent\n.\nreason\n)\n \n--> error code and reason\n\n  \nend\n\n\nend\n\n\n\n...\n\n\n\n\n\n\nSetup Example\n\n\nlocal\n \nWebSockets\n \n=\n \nrequire\n(\n\"plugin.websockets\"\n)\n\n\n\nlocal\n \nws\n \n=\n \nWebSockets\n.\nnew\n()\n\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONOPEN\n \nthen\n\n    \nprint\n(\n'connected'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONMESSAGE\n \nthen\n\n    \nprint\n(\n'message'\n,\n \nevent\n.\ndata\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONCLOSE\n \nthen\n\n    \nprint\n(\n'disconnected'\n,\n \nevent\n.\ncode\n,\n \nevent\n.\nreason\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONERROR\n \nthen\n\n    \nprint\n(\n'error'\n,\n \nevent\n.\ncode\n,\n \nevent\n.\nreason\n)\n\n  \nend\n\n\nend\n\n\n\nws\n:\naddEventListener\n(\nws\n.\nWSEVENT\n,\n \nWsListener\n)\n\n\nws\n:\nconnect\n(\n'ws://demos.kaazing.com/echo'\n)\n\n\n\n\n\n\n Download the demo project from the \nDemo\n section for an even more detailed example.",
+            "title": "API"
+        },
+        {
+            "location": "/api/#api",
+            "text": "",
+            "title": "API"
+        },
+        {
+            "location": "/api/#new",
+            "text": "Creates a new WebSocket object.  WebSockets . new ()   Arguments  This method takes no arguments.  Returns  A new WebSocket object  Example  local   ws   =   WebSockets . new ()    Alternatively, you can create a WebSocket object during the require.  local   ws   =   require ( \"plugin.websockets\" ). new ()",
+            "title": "new"
+        },
+        {
+            "location": "/api/#addeventlistener",
+            "text": "Add the WebSocket event handler.  ws : addEventListener ( event ,   listener )   Arguments     Name  Description  Type  Required      event  The event to start listening for. Must be  WSEVENT .  Constant  Y    listener  The function that will be called on a WebSocket event.  Function  Y     Example  ...  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONOPEN   then \n     print ( 'connected' ) \n   elseif   event . type   ==   ws . ONMESSAGE   then \n     print ( 'message' ) \n   elseif   event . type   ==   ws . ONCLOSE   then \n     print ( 'disconnected' ) \n   elseif   event . type   ==   ws . ONERROR   then \n     print ( 'error' ) \n   end  end  ws : addEventListener ( ws . WSEVENT ,   WsListener )  ...    See  Event Constants  for more details about each event type.",
+            "title": "addEventListener"
+        },
+        {
+            "location": "/api/#removeeventlistener",
+            "text": "Remove the WebSocket event handler.  ws : removeEventListener ( event ,   event_handler )   Arguments     Name  Description  Type  Required      event  The event to stop listening for. Must be  WSEVENT .  Constant  Y    listener  The function that is being called on a WebSocket event.  Function  Y     Example  Assuming the event listener in the  addEventListener  example.  ws : removeEventListener ( ws . WSEVENT ,   WsListener )",
+            "title": "removeEventListener"
+        },
+        {
+            "location": "/api/#connect",
+            "text": "Connect the WebSocket object to a WebSocket endpoint.  ws : connect ( uri [,   port ])   Arguments     Name  Description  Type  Required      uri  The WebSocket endpoint to connect to. Supports  ws://  and  wss://  protocols.  String  Y    port  The port for the WebSocket endpoint. Defaults to  80  for  ws://  and  443  for  wss://  protocols.  Number  N     Example  ws : connect ( 'ws://demos.kaazing.com/echo' )    Make sure your WebSocket event handler is set up before calling this method. See  addEventListener .",
+            "title": "connect"
+        },
+        {
+            "location": "/api/#disconnect",
+            "text": "Disconnect the WebSocket object from the endpoint.  ws : disconnect ()   Arguments  This method takes no arguments.",
+            "title": "disconnect"
+        },
+        {
+            "location": "/api/#send",
+            "text": "Send a message over the WebSocket connection.  ws : send ( data )   Arguments     Name  Description  Type  Required      data  The message data to send over the connection.  String  Y     Example  ws : send ( \"Hello WebSocket server\" )",
+            "title": "send"
+        },
+        {
+            "location": "/api/#event-constants",
+            "text": "The following event constants are used in the WebSocket event listener. Some events will include addtional data that can be accessed from the  event  object. See also:  addEventListener .",
+            "title": "Event Constants"
+        },
+        {
+            "location": "/api/#onopen",
+            "text": "The WebSocket connection is open and ready.  ws . ONOPEN   Event Keys  This event contains no event keys.  Example  ...  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONOPEN   then \n     print ( 'connected' ) \n   end  end  ...",
+            "title": "ONOPEN"
+        },
+        {
+            "location": "/api/#onmessage",
+            "text": "A WebSocket message has been received.  ws . ONMESSAGE   Event Keys   data   Example  ...  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONMESSAGE   then \n     print ( event . data )   --> message data \n   end  end  ...",
+            "title": "ONMESSAGE"
+        },
+        {
+            "location": "/api/#onclose",
+            "text": "The WebSocket connection has closed and is no longer available.  ws . ONCLOSE   Event Keys   code  reason   Example  ...  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONCLOSE   then \n     print ( event . code ,   event . reason )   --> closure code and reason \n   end  end  ...",
+            "title": "ONCLOSE"
+        },
+        {
+            "location": "/api/#onerror",
+            "text": "A WebSocket error has occurred. This will generally close the connection.  ws . ONERROR   Event Keys   code  reason   Example  ...  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONERROR   then \n     print ( event . code ,   event . reason )   --> error code and reason \n   end  end  ...",
+            "title": "ONERROR"
+        },
+        {
+            "location": "/api/#setup-example",
+            "text": "local   WebSockets   =   require ( \"plugin.websockets\" )  local   ws   =   WebSockets . new ()  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONOPEN   then \n     print ( 'connected' ) \n   elseif   event . type   ==   ws . ONMESSAGE   then \n     print ( 'message' ,   event . data ) \n   elseif   event . type   ==   ws . ONCLOSE   then \n     print ( 'disconnected' ,   event . code ,   event . reason ) \n   elseif   event . type   ==   ws . ONERROR   then \n     print ( 'error' ,   event . code ,   event . reason ) \n   end  end  ws : addEventListener ( ws . WSEVENT ,   WsListener )  ws : connect ( 'ws://demos.kaazing.com/echo' )    Download the demo project from the  Demo  section for an even more detailed example.",
+            "title": "Setup Example"
+        },
+        {
+            "location": "/demo/",
+            "text": "WebSockets Plugin Demo\n\n\n\n \nClick here to download\n the full Corona demo project.",
+            "title": "Demo"
+        },
+        {
+            "location": "/html5/",
+            "text": "The \nWebSockets\n plugin is for device builds only and does not support HTML5 builds. If you would like to add support for HTML5 builds you can use the \nCorona HTML5 WebSockets Plugin\n.\n\n\nHybrid Builds\n\n\nYou can create hybrid builds, supporting both devices and HTML5. The following demonstrates how to do this in your Corona project.\n\n\nFirst make sure to download the \nCorona HTML5 WebSockets Plugin\n and add it to your project as per the instructions found at the link.\n\n\nIntegration\n\n\nYou can handle the slight differences between the device and HTML5 plugin using a \"platform\" check. Both plugin types support the same listener function setup.\n\n\n \nThe major difference between the device and HTML5 plugin methods is the use of the colon (:) versus dot (.) syntax.\n\n\nHybrid Setup\n\n\nlocal\n \nplatform\n \n=\n \nsystem\n.\ngetInfo\n(\n\"platform\"\n)\n\n\nlocal\n \nws\n\n\n\n--require the proper plugin\n\n\nif\n \nplatform\n \n==\n \n\"html5\"\n \nthen\n\n  \nws\n \n=\n \nrequire\n(\n\"websockets\"\n)\n\n\nelse\n\n  \nws\n \n=\n \nrequire\n(\n\"plugin.websockets\"\n)\n\n\nend\n\n\n\n--create the websockets listener\n\n\nlocal\n \nfunction\n \nWsListener\n(\nevent\n)\n\n  \nif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONOPEN\n \nthen\n\n    \nprint\n(\n'connected'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONMESSAGE\n \nthen\n\n    \nprint\n(\n'message'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONCLOSE\n \nthen\n\n    \nprint\n(\n'disconnected'\n)\n\n  \nelseif\n \nevent\n.\ntype\n \n==\n \nws\n.\nONERROR\n \nthen\n\n    \nprint\n(\n'error'\n)\n\n  \nend\n\n\nend\n\n\n\n--add the event listener\n\n\nif\n \nplatform\n \n==\n \n\"html5\"\n \nthen\n\n  \nws\n.\naddEventListener\n(\n \nWsListener\n \n)\n\n  \nws\n.\nconnect\n(\n'ws://<websocket-endpoint>'\n)\n\n\nelse\n\n  \nws\n:\naddEventListener\n(\nws\n.\nWSEVENT\n,\n \nWsListener\n)\n\n  \nws\n:\nconnect\n(\n'ws://<websocket-endpoint>'\n)\n\n\nend\n\n\n\n\n\n\nSending Data\n\n\nTo send data over the WebSocket connection in a hybrid build, it is easiest if you create a function specifically for sending.\n\n\nfunction\n \nsend\n(\n \ndata\n \n)\n\n  \nif\n \nplatform\n \n==\n \n\"html5\"\n \nthen\n\n    \nws\n.\nsend\n(\n \ndata\n \n)\n\n  \nelse\n\n    \nws\n:\nsend\n(\n \ndata\n \n)\n\n  \nend\n\n\nend\n\n\n\nsend\n(\n\"Hello WebSockets!\"\n)",
+            "title": "HTML5"
+        },
+        {
+            "location": "/html5/#hybrid-builds",
+            "text": "You can create hybrid builds, supporting both devices and HTML5. The following demonstrates how to do this in your Corona project.  First make sure to download the  Corona HTML5 WebSockets Plugin  and add it to your project as per the instructions found at the link.",
+            "title": "Hybrid Builds"
+        },
+        {
+            "location": "/html5/#integration",
+            "text": "You can handle the slight differences between the device and HTML5 plugin using a \"platform\" check. Both plugin types support the same listener function setup.    The major difference between the device and HTML5 plugin methods is the use of the colon (:) versus dot (.) syntax.",
+            "title": "Integration"
+        },
+        {
+            "location": "/html5/#hybrid-setup",
+            "text": "local   platform   =   system . getInfo ( \"platform\" )  local   ws  --require the proper plugin  if   platform   ==   \"html5\"   then \n   ws   =   require ( \"websockets\" )  else \n   ws   =   require ( \"plugin.websockets\" )  end  --create the websockets listener  local   function   WsListener ( event ) \n   if   event . type   ==   ws . ONOPEN   then \n     print ( 'connected' ) \n   elseif   event . type   ==   ws . ONMESSAGE   then \n     print ( 'message' ) \n   elseif   event . type   ==   ws . ONCLOSE   then \n     print ( 'disconnected' ) \n   elseif   event . type   ==   ws . ONERROR   then \n     print ( 'error' ) \n   end  end  --add the event listener  if   platform   ==   \"html5\"   then \n   ws . addEventListener (   WsListener   ) \n   ws . connect ( 'ws://<websocket-endpoint>' )  else \n   ws : addEventListener ( ws . WSEVENT ,   WsListener ) \n   ws : connect ( 'ws://<websocket-endpoint>' )  end",
+            "title": "Hybrid Setup"
+        },
+        {
+            "location": "/html5/#sending-data",
+            "text": "To send data over the WebSocket connection in a hybrid build, it is easiest if you create a function specifically for sending.  function   send (   data   ) \n   if   platform   ==   \"html5\"   then \n     ws . send (   data   ) \n   else \n     ws : send (   data   ) \n   end  end  send ( \"Hello WebSockets!\" )",
+            "title": "Sending Data"
+        },
+        {
+            "location": "/about/",
+            "text": "WebSockets Plugin\n\n\n\nCode and documentation \u00a92018 C. Byerley (\ndevelephant\n)",
+            "title": "About"
+        }
+    ]
+}

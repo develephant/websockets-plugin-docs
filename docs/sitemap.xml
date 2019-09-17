@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>https://develephant.github.io/websockets-plugin//</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://develephant.github.io/websockets-plugin//api/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://develephant.github.io/websockets-plugin//demo/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://develephant.github.io/websockets-plugin//html5/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://develephant.github.io/websockets-plugin//about/</loc>
+     <lastmod>2018-05-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>
