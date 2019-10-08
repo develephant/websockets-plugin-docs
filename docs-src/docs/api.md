@@ -4,11 +4,11 @@ Before using the __WebSockets__ plugin you must `require` it in your code file:
 local WebSockets = require("plugin.websockets")
 ```
 
-## API
+## Methods
 
 ### new
 
-Creates a new WebSocket object.
+Creates a new WebSocket client.
 
 ```lua
 WebSockets.new()
@@ -20,18 +20,12 @@ _This method takes no arguments._
 
 __Returns__
 
-A new WebSocket object
+A new WebSocket client.
 
 __Example__
 
 ```lua
 local ws = WebSockets.new()
-```
-
-<i class="fas fa-hand-point-right fa-fw" style="color: yellowgreen;"></i> Alternatively, you can create a WebSocket object during the require.
-
-```lua
-local ws = require("plugin.websockets").new()
 ```
 
 ---
@@ -41,7 +35,7 @@ local ws = require("plugin.websockets").new()
 Add the WebSocket event handler.
 
 ```lua
-ws:addEventListener(event, listener)
+ws:addEventListener(event, handler)
 ```
 
 __Arguments__
@@ -49,14 +43,14 @@ __Arguments__
 |Name|Description|Type|Required|
 |----|-----------|----|--------|
 |event|The event to start listening for. Must be `WSEVENT`.|_Constant_|__Y__|
-|listener|The function that will be called on a WebSocket event.|_Function_|__Y__|
+|handler|The function that will be called on a WebSocket event.|_Function_|__Y__|
 
 __Example__
 
 ```lua
 ...
 
-local function WsListener(event)
+local function WsHandler(event)
   if event.type == ws.ONOPEN then
     print('connected')
   elseif event.type == ws.ONMESSAGE then
@@ -68,7 +62,7 @@ local function WsListener(event)
   end
 end
 
-ws:addEventListener(ws.WSEVENT, WsListener)
+ws:addEventListener(ws.WSEVENT, WsHandler)
 
 ...
 ```
@@ -82,7 +76,7 @@ ws:addEventListener(ws.WSEVENT, WsListener)
 Remove the WebSocket event handler.
 
 ```lua
-ws:removeEventListener(event, event_handler)
+ws:removeEventListener(event, handler)
 ```
 
 __Arguments__
@@ -90,14 +84,14 @@ __Arguments__
 |Name|Description|Type|Required|
 |----|-----------|----|--------|
 |event|The event to stop listening for. Must be `WSEVENT`.|_Constant_|__Y__|
-|listener|The function that is being called on a WebSocket event.|_Function_|__Y__|
+|handler|The function that is being called on a WebSocket event.|_Function_|__Y__|
 
 __Example__
 
-_Assuming the event listener in the `addEventListener` example._
+_Assuming the event handler in the `addEventListener` example._
 
 ```lua
-ws:removeEventListener(ws.WSEVENT, WsListener)
+ws:removeEventListener(ws.WSEVENT, WsHandler)
 ```
 
 ---
@@ -107,7 +101,7 @@ ws:removeEventListener(ws.WSEVENT, WsListener)
 Connect the WebSocket object to a WebSocket endpoint.
 
 ```lua
-ws:connect(uri[, port])
+ws:connect(uri[, options])
 ```
 
 __Arguments__
@@ -115,7 +109,14 @@ __Arguments__
 |Name|Description|Type|Required|
 |----|-----------|----|--------|
 |uri|The WebSocket endpoint to connect to. Supports `ws://` and `wss://` protocols.|_String_|__Y__|
+|options|An optional table of options for the connection (see below).|_Table_|__N__|
+
+__Options Table__
+
+|Name|Description|Type|Required|
+|----|-----------|----|--------|
 |port|The port for the WebSocket endpoint. Defaults to __80__ for `ws://` and __443__ for `wss://` protocols.|_Number_|__N__|
+|tls|The TLS protocol version to use for a secure socket (`wss://`). Defaults to __TLS_1_2__.|[_Constant_](#tls-constants)|__N__|
 
 __Example__
 
@@ -184,7 +185,7 @@ __Example__
 ```lua
 ...
 
-local function WsListener(event)
+local function WsHandler(event)
   if event.type == ws.ONOPEN then
     print('connected')
   end
@@ -212,7 +213,7 @@ __Example__
 ```lua
 ...
 
-local function WsListener(event)
+local function WsHandler(event)
   if event.type == ws.ONMESSAGE then
     print(event.data) --> message data
   end
@@ -241,7 +242,7 @@ __Example__
 ```lua
 ...
 
-local function WsListener(event)
+local function WsHandler(event)
   if event.type == ws.ONCLOSE then
     print(event.code, event.reason) --> closure code and reason
   end
@@ -270,7 +271,7 @@ __Example__
 ```lua
 ...
 
-local function WsListener(event)
+local function WsHandler(event)
   if event.type == ws.ONERROR then
     print(event.code, event.reason) --> error code and reason
   end
@@ -279,14 +280,44 @@ end
 ...
 ```
 
+---
+
+## TLS Constants
+
+<i class="fas fa-exclamation-triangle fa-fw" style="color: yellowgreen;"></i> By default a secure (`wss://`) client connection uses __TLS 1.2__.
+
+The following constants are available for backward compatibility or older systems, and are passed in through the `options` table (see [connect](#connect)).
+
+### TLS_1_0
+
+Use TLS version 1.0 as the secure protocol.
+
+```lua
+ws.TLS_1_0
+```
+
+---
+
+### TLS_1_1
+
+Use TLS version 1.1 as the secure protocol.
+
+```lua
+ws.TLS_1_1
+```
+
+---
+
 ## Setup Example
+
+### Simple Connect
 
 ```lua
 local WebSockets = require("plugin.websockets")
 
 local ws = WebSockets.new()
 
-local function WsListener(event)
+local function WsHandler(event)
   if event.type == ws.ONOPEN then
     print('connected')
   elseif event.type == ws.ONMESSAGE then
@@ -298,8 +329,18 @@ local function WsListener(event)
   end
 end
 
-ws:addEventListener(ws.WSEVENT, WsListener)
+ws:addEventListener(ws.WSEVENT, WsHandler)
 ws:connect('ws://demos.kaazing.com/echo')
+```
+
+### Using Options
+
+```lua
+....
+
+ws:connect('wss://demos.kaazing.com/echo', {
+  tls = ws.TLS_1_0
+})
 ```
 
 <i class="fas fa-cloud-download-alt fa-fw" style="color: yellowgreen;"></i> Download the demo project from the __[Demo](/demo/)__ section for an even more detailed example.
